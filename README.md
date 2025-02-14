@@ -25,7 +25,7 @@ system-info-now provides a snapshot of your system's current state in a standard
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/system-info-now.git
+git clone https://github.com/bjoaquinc/system-info-now.git
 cd system-info-now
 ```
 
@@ -102,4 +102,4 @@ If you encounter any problems or have suggestions, please file an issue on the G
 
 ## Authors
 
-- Your Name (@bjoaquinc)
+- Joaquin Coromina (@bjoaquinc)
