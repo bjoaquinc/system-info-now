@@ -1,25 +1,46 @@
 # system-info-now
 
-A lightweight Python utility that captures and exports comprehensive system information to JSON in one command.
+A lightweight Python utility that aggregates and exports comprehensive system information to JSON, specifically designed for feeding system context into Large Language Models (LLMs).
 
 ## Description
 
-system-info-now provides a snapshot of your system's current state in a standardized, easy-to-parse format. It gathers real-time data about your operating system, hardware, running processes, and environment variables, making it perfect for system diagnostics, environment documentation, and troubleshooting.
+system-info-now provides a snapshot of your system's current state in a standardized, easy-to-parse format. It gathers real-time data about your operating system, hardware, running processes, and environment variables, making it ideal for:
+- System diagnostics
+- Environment documentation
+- Troubleshooting
+- Providing contextual information to AI models and language models
+
+By generating a detailed JSON output, the tool enables seamless integration of system context into AI-powered workflows, allowing LLMs to understand the specific environment and configuration details.
 
 ## Features
 
+### System Debug Data
 - Operating system details and version
-- CPU specifications and core count
+- CPU and GPU specifications
 - Memory usage and statistics
 - Disk utilization
 - Network interface information
-- Current running processes (top 10 by CPU usage)
-- Git repository status (if in a repo)
+- Current running processes
+- Git repository status
 - System uptime and load averages
 - Environment variables
 - User information
-- Cross-platform support (Windows, Linux, macOS)
-- JSON output for easy parsing and integration
+
+### Language-Specific Debug Data
+Currently supported:
+- Python environment details
+- JavaScript environment information
+
+*More languages coming soon!*
+
+### Operating System Support
+Currently supported:
+- macOS
+
+*Coming soon:*
+- Linux
+- Windows
+
 
 ## Installation
 
@@ -31,57 +52,59 @@ cd system-info-now
 
 2. Install required dependencies:
 ```bash
-pip install psutil
+pip install psutil pyyaml
 ```
 
 ## Usage
 
+1. Basic usage:
+
 Run the script from the project directory:
 ```bash
-python system_info.py
+python main.py
 ```
 
-This will create a `system_data.json` file in your current directory.
+2. Configuration (optional): Update the config.yaml file in the project root:
+
+```yaml
+output:
+  format: json # Only supports json currently
+  directory: output
+  filename: system_data.json
+logging:
+  level: INFO
+  directory: logs
+project:
+  root_dir: "." # Customizable root directory path for project specific context gathering used by language collectors
+collectors: # Controls what data should be collected
+  system: true
+  python: true
+  javascript: true
+  # Additional collectors can be enabled as they become available
+```
+
+This will create an `output/system_data.json` file in your current directory.
 
 ## Requirements
 
 - Python 3.x
-- psutil library
+- Mac OS (Working on supportin **Linux** and **Windows**)
 
 ## Output Example
 
 ```json
 {
-  "os": {
-    "name": "Darwin",
-    "version": "21.6.0",
-    "release": "21.6.0",
-    "architecture": "arm64"
+  "system_debug_data": {
+    // ... system details including OS, CPU, GPU, memory, disk, network info
   },
-  "cpu_info": {
-    "processor": "arm",
-    "cores": 8,
-    "logical_processors": 8
+  "python_debug_data": {
+    // ... Python runtime information, paths, dependencies, and virtual environment details
   },
-  "memory_info": {
-    "total": 16000000000,
-    "available": 8000000000,
-    "used": 8000000000,
-    "percent": 50.0
+  "javascript_debug_data": {
+    // ... Node.js version, global packages, installed browsers, and npm configuration
   }
-  // ... additional system information
 }
 ```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## License
 
@@ -89,12 +112,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Future Plans
 
-- Command line arguments for customizing output
-- Additional system metrics collection
-- Export formats beyond JSON (YAML, CSV)
-- Option to exclude sensitive information
-- VS Code extension integration
-- Package distribution via pip
+- Support more operating systems
+- Support more languages for debugging
+- Support more useful data in existing languages
 
 ## Support
 
