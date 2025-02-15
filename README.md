@@ -12,6 +12,16 @@ system-info-now provides a snapshot of your system's current state in a standard
 
 By generating a detailed JSON output, the tool enables seamless integration of system context into AI-powered workflows, allowing LLMs to understand the specific environment and configuration details.
 
+## ⚠️ IMPORTANT: Sensitive Data Warning
+
+**CAUTION**: This tool collects comprehensive system information that may include:
+- Environment variables
+- Path details
+- User information
+- Potentially sensitive configuration data
+
+🛡️ **ALWAYS REVIEW THE OUTPUT FILE BEFORE SHARING OR FEEDING TO ANY LLM**
+
 ## Features
 
 ### System Debug Data
@@ -88,7 +98,7 @@ This will create an `output/system_data.json` file in your current directory.
 ## Requirements
 
 - Python 3.x
-- Mac OS (Working on supportin **Linux** and **Windows**)
+- Mac OS (Working on supporting **Linux** and **Windows** soon)
 
 ## Output Example
 
