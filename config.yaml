@@ -18,3 +18,4 @@ collectors:
   system: true # WARNING: This includes sensitive system data, be careful where you send it
   python: true
   javascript: true
+  
