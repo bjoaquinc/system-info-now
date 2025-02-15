@@ -1,0 +1,14 @@
+# System Info Now Configuration
+output:
+  format: json
+  directory: output
+  filename: system_data.json
+
+logging:
+  level: INFO
+  directory: logs
+
+collectors:
+  system: true # WARNING: This includes sensitive system data, be careful where you send it
+  python: true
+  javascript: true
