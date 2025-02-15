@@ -1,6 +1,6 @@
-# System Info Now Configuration
+# System Info Now Configuration File
 output:
-  format: json
+  format: json # Only json is currently supported
   directory: output
   filename: system_data.json
 
