@@ -84,8 +84,13 @@ output:
 logging:
   level: INFO
   directory: logs
+
+# Customizable root directory path for project 
+# specific context gathering used by language 
+# collectors
 project:
-  root_dir: "." # Customizable root directory path for project specific context gathering used by language collectors
+  root_dir: "." # Can be absolute path
+
 collectors: # Controls what data should be collected
   system: true
   python: true

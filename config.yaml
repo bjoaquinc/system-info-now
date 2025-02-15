@@ -8,6 +8,9 @@ logging:
   level: INFO
   directory: logs
 
+# Customizable root directory path for project 
+# specific context gathering used by language 
+# collectors
 project:
   root_dir: "." # Default to current directory, can be set to absolute path
 
