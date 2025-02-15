@@ -8,6 +8,9 @@ logging:
   level: INFO
   directory: logs
 
+project:
+  root_dir: "." # Default to current directory, can be set to absolute path
+
 collectors:
   system: true # WARNING: This includes sensitive system data, be careful where you send it
   python: true

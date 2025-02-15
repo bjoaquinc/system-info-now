@@ -4,7 +4,7 @@ import site
 import subprocess
 import json
 
-def get_python_debug_info():
+def get_python_debug_info(project_root):
     try:
         python_info = {
             "runtime": {
@@ -48,8 +48,10 @@ def get_python_debug_info():
         }
 
         # Get requirements.txt content if it exists
-        if python_info["dependencies"]["requirements"]["exists"]:
-            with open('requirements.txt', 'r') as f:
+        requirements_path = project_root / 'requirements.txt'
+        if requirements_path.exists():
+            python_info["dependencies"]["requirements"]["exists"] = True
+            with open(requirements_path, 'r') as f:
                 python_info["dependencies"]["requirements"]["content"] = f.read()
 
         # Get pip version and installed packages
@@ -84,7 +86,7 @@ def get_python_debug_info():
         venv_locations = [
             os.path.expanduser('~/.virtualenvs/'),
             os.path.expanduser('~/venvs/'),
-            os.getcwd(),
+            str(project_root),  # Use the project root
             os.path.expanduser('~/Desktop/'),
         ]
 

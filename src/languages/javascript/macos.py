@@ -3,7 +3,7 @@ import json
 import os
 from pathlib import Path
 
-def get_javascript_debug_info():
+def get_javascript_debug_info(project_root):
     try:
         js_info = {
             "node": {
@@ -18,6 +18,10 @@ def get_javascript_debug_info():
             "browsers": {}
         }
         
+        # Update path references to use project_root
+        package_json_path = project_root / 'package.json'
+        node_modules_path = project_root / 'node_modules'
+
         # Check Node.js installation
         try:
             node_version = subprocess.check_output(["node", "--version"], text=True).strip()
@@ -33,14 +37,18 @@ def get_javascript_debug_info():
             js_info["node"]["global_packages"] = json.loads(npm_packages)
 
             # Get local packages if package.json exists
-            if os.path.exists('package.json'):
+            if package_json_path.exists():
                 # Read package.json
-                with open('package.json', 'r') as f:
+                with open(package_json_path, 'r') as f:
                     package_json = json.load(f)
                 
-                # Get actual installed packages
+                # Update the npm list command to run from project root
                 try:
-                    local_packages = subprocess.check_output(["npm", "list", "--json"], text=True)
+                    local_packages = subprocess.check_output(
+                        ["npm", "list", "--json"],
+                        text=True,
+                        cwd=str(project_root)
+                    )
                     js_info["node"]["local_packages"] = json.loads(local_packages)
                     
                     # Check for missing dependencies
@@ -50,7 +58,6 @@ def get_javascript_debug_info():
                         **package_json.get('devDependencies', {})
                     }
                     
-                    node_modules_path = Path('node_modules')
                     for dep in required_deps:
                         dep_path = node_modules_path / dep
                         if not dep_path.exists():
