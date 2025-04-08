@@ -46,9 +46,9 @@ Currently supported:
 ### Operating System Support
 Currently supported:
 - macOS
+- Linux
 
 *Coming soon:*
-- Linux
 - Windows
 
 
@@ -103,7 +103,7 @@ This will create an `output/system_data.json` file in your current directory.
 ## Requirements
 
 - Python 3.x
-- Mac OS (Working on supporting **Linux** and **Windows** soon)
+- Mac OS or Linux (Working on supporting **Windows** soon)
 
 ## Output Example
 
@@ -127,7 +127,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Future Plans
 
-- Support more operating systems
+- Support more operating systems (Windows coming soon)
 - Support more languages for debugging
 - Support more useful data in existing languages
 
