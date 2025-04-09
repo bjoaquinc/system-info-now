@@ -15,7 +15,13 @@ project:
   root_dir: "." # Default to current directory, can be set to absolute path
 
 collectors:
-  system: true # WARNING: This includes sensitive system data, be careful where you send it
-  python: true
-  javascript: true
+  # Core system information - recommended to keep enabled
+  system: true
+  
+  # Language-specific collectors - disabled by default
+  # WARNING: When feeding data to LLMs, the complex structure with many versions, 
+  # paths, and package details in these collectors may cause hallucinations.
+  # Only enable if you specifically need this language data.
+  python: false
+  javascript: false
   
