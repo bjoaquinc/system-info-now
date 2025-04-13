@@ -37,7 +37,7 @@ By generating a detailed JSON output, the tool enables seamless integration of s
 - User information
 
 ### Language-Specific Debug Data
-Currently supported:
+Currently supported (disabled by default):
 - Python environment details
 - JavaScript environment information
 
@@ -46,9 +46,9 @@ Currently supported:
 ### Operating System Support
 Currently supported:
 - macOS
+- Linux
 
 *Coming soon:*
-- Linux
 - Windows
 
 
@@ -77,10 +77,12 @@ python main.py
 2. Configuration (optional): Update the config.yaml file in the project root:
 
 ```yaml
+# System Info Now Configuration File
 output:
-  format: json # Only supports json currently
+  format: json # Only json is currently supported
   directory: output
   filename: system_data.json
+
 logging:
   level: INFO
   directory: logs
@@ -89,13 +91,19 @@ logging:
 # specific context gathering used by language 
 # collectors
 project:
-  root_dir: "." # Can be absolute path
+  root_dir: "." # Default to current directory, can be set to absolute path
 
-collectors: # Controls what data should be collected
+collectors:
+  # Core system information - recommended to keep enabled
   system: true
-  python: true
-  javascript: true
-  # Additional collectors can be enabled as they become available
+  
+  # Language-specific collectors - disabled by default
+  # WARNING: When feeding data to LLMs, the complex structure with many versions, 
+  # paths, and package details in these collectors may cause hallucinations.
+  # Only enable if you specifically need this language data.
+  python: false
+  javascript: false
+  
 ```
 
 This will create an `output/system_data.json` file in your current directory.
@@ -103,7 +111,7 @@ This will create an `output/system_data.json` file in your current directory.
 ## Requirements
 
 - Python 3.x
-- Mac OS (Working on supporting **Linux** and **Windows** soon)
+- Mac OS or Linux (Working on supporting **Windows** soon)
 
 ## Output Example
 
@@ -127,7 +135,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Future Plans
 
-- Support more operating systems
+- Support more operating systems (Windows coming soon)
 - Support more languages for debugging
 - Support more useful data in existing languages
 
