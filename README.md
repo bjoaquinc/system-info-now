@@ -146,3 +146,4 @@ If you encounter any problems or have suggestions, please file an issue on the G
 ## Authors
 
 - Joaquin Coromina (@bjoaquinc)
+- Amar Begovic (@AmarBego)
